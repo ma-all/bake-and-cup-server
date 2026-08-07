@@ -9,6 +9,15 @@ const create = async (req, res) => {
     }
 }
 
+const index = async (req, res) => {
+    try {
+        const menuItem = await MenuItem.find({})
+        res.status(200).json(menuItem)
+    } catch (error) {
+        res.status(500).json({ error: error.message })
+    }
+}
+
 module.exports = {
-    create,
+    create, index,
 }
