@@ -36,6 +36,15 @@ const update = async (req, res) => {
     }
 }
 
+const deleteMenuItem = async (req, res) => {
+    try {
+        const deletedMenuItem = await MenuItem.findByIdAndDelete(req.params.menuItemId)
+        res.status(200).json(deletedMenuItem)
+    } catch (error) {
+        res.status(500).json({ error: error.message })
+    }
+}
+
 module.exports = {
-    create, index, show, update,
+    create, index, show, update, deleteMenuItem,
 }
