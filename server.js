@@ -39,6 +39,7 @@ app.get('/users', verifyToken, usersCtrl.index)
 //menuItems routes
 app.post('/menu-items', menuCtrl.create)
 app.get('/menu-items', menuCtrl.index)
+app.get('/menu-items/:menuItemId', menuCtrl.show)
 
 app.listen(PORT, () => {
   console.log(`The express app is ready on port ${PORT}! 😀`)

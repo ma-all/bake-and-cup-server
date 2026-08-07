@@ -18,6 +18,15 @@ const index = async (req, res) => {
     }
 }
 
+const show = async (req, res) => {
+    try {
+        const menuItem = await MenuItem.findById(req.params.menuItemId)
+        res.status(200).json(menuItem)
+    } catch (error) {
+        res.status(500).json({ error: error.message })
+    }
+}
+
 module.exports = {
-    create, index,
+    create, index, show,
 }
