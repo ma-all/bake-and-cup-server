@@ -40,6 +40,7 @@ app.get('/users', verifyToken, usersCtrl.index)
 app.post('/menu-items', menuCtrl.create)
 app.get('/menu-items', menuCtrl.index)
 app.get('/menu-items/:menuItemId', menuCtrl.show)
+app.post('/menu-items/:menuItemId', menuCtrl.update)
 
 app.listen(PORT, () => {
   console.log(`The express app is ready on port ${PORT}! 😀`)
