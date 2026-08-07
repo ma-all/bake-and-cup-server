@@ -22,6 +22,9 @@ const menuItemSchema = new mongoose.Schema({
         required: true,
         min: 0.1,
     },
+    img: {
+        type: String,
+    }
 }, {timestamps: true})
 
 const MenuItem = mongoose.model('MenuItem', menuItemSchema)

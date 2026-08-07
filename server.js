@@ -13,6 +13,9 @@ const PORT = process.env.PORT ? process.env.PORT : "3000"
 const authCtrl = require('./controllers/auth')
 const usersCtrl = require('./controllers/users')
 
+//menuItems ctrl
+const menuCtrl = require('./controllers/menuItems')
+
 const verifyToken = require('./middleware/verify-token')
 
 mongoose.connect(process.env.MONGODB_URI)
@@ -32,6 +35,10 @@ app.post('/auth/sign-up', authCtrl.signUp)
 app.post('/auth/sign-in', authCtrl.signIn)
 
 app.get('/users', verifyToken, usersCtrl.index)
+
+//menuItems routes
+app.post('/menu-items', menuCtrl.create)
+
 
 app.listen(PORT, () => {
   console.log(`The express app is ready on port ${PORT}! 😀`)
