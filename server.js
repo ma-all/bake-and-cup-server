@@ -16,6 +16,10 @@ const usersCtrl = require('./controllers/users')
 //menuItems ctrl
 const menuCtrl = require('./controllers/menuItems')
 
+// order ctrl
+const orderCtrl = require('./controllers/orders')
+
+
 const verifyToken = require('./middleware/verify-token')
 
 mongoose.connect(process.env.MONGODB_URI)
@@ -42,6 +46,15 @@ app.get('/menu-items', menuCtrl.index)
 app.get('/menu-items/:menuItemId', menuCtrl.show)
 app.put('/menu-items/:menuItemId', menuCtrl.update)
 app.delete('/menu-items/:menuItemId', menuCtrl.deleteMenuItem)
+
+
+// order routes
+app.post('/orders',orderCtrl.create)
+app.get('/orders', orderCtrl.index)
+app.get('/orders/:orderId', orderCtrl.show)
+app.put('/orders/:orderId', orderCtrl.update)
+app.delete('/orders/:orderId', orderCtrl.deleteOrder)
+
 
 app.listen(PORT, () => {
   console.log(`The express app is ready on port ${PORT}! 😀`)
