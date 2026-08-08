@@ -1,7 +1,30 @@
 const MenuItem = require('../models/menuItem')
+const cloudinary = require('../config/cloudinary')
+
+const addImg = (fileBuffer) => {
+    return new Promise((resolve, reject) => {
+        const uploadImgs = cloudinary.uploader.upload_stream({
+            folder: 'bake-and-cup-server/menu-items',
+            resource_type: 'image'
+        },
+        (error, result) => {
+            if(error) {
+                reject(error)
+            } else {
+                resolve(result)
+            }
+        }
+    )
+    uploadImgs.end(fileBuffer)
+    })
+}
 
 const create = async (req, res) => {
     try {
+        if (req.file) {
+            const addedImg = await addImg(req.file.buffer)
+            req.body.img = addedImg.secure_url
+        }
         const menuItem = await MenuItem.create(req.body)
         res.status(201).json(menuItem)
     } catch (error) {

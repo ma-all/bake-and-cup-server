@@ -7,6 +7,7 @@ const app = express()
 const mongoose = require('mongoose')
 const cors = require('cors')
 const morgan = require('morgan')
+const uploadImages = require('./config/multer')
 
 const PORT = process.env.PORT ? process.env.PORT : "3000"
 
@@ -41,7 +42,7 @@ app.post('/auth/sign-in', authCtrl.signIn)
 app.get('/users', verifyToken, usersCtrl.index)
 
 //menuItems routes
-app.post('/menu-items', menuCtrl.create)
+app.post('/menu-items', uploadImages.single('img'), menuCtrl.create)
 app.get('/menu-items', menuCtrl.index)
 app.get('/menu-items/:menuItemId', menuCtrl.show)
 app.put('/menu-items/:menuItemId', menuCtrl.update)
