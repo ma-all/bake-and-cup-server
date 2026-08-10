@@ -11,6 +11,8 @@ const uploadImages = require('./config/multer')
 
 const PORT = process.env.PORT ? process.env.PORT : "3000"
 
+const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY)
+
 const authCtrl = require('./controllers/auth')
 const usersCtrl = require('./controllers/users')
 
@@ -19,7 +21,6 @@ const menuCtrl = require('./controllers/menuItems')
 
 // order ctrl
 const orderCtrl = require('./controllers/orders')
-
 
 const verifyToken = require('./middleware/verify-token')
 
@@ -55,6 +56,9 @@ app.get('/orders', orderCtrl.index)
 app.get('/orders/:orderId', orderCtrl.show)
 app.put('/orders/:orderId', orderCtrl.update)
 app.delete('/orders/:orderId', orderCtrl.deleteOrder)
+
+//payment 
+app.post('/orders/create-payment', orderCtrl.createPayment)
 
 
 app.listen(PORT, () => {
