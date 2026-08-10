@@ -65,7 +65,8 @@ const createPayment = async (req, res) => {
 
     const createPayment = await stripe.paymentIntents.create({
         amount: Math.round(payAmount * 100), 
-        currency: 'usd' //trying to see if it works with usd or not
+        currency: 'usd', //trying to see if it works with usd or not
+        payment_method_types: ['card'],
     })
     res.send({ clientSecret: createPayment.client_secret })
 }
