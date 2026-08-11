@@ -23,6 +23,7 @@ const User = require('../models/user')
 // }
 
 const signUp = async (req, res) => {
+    console.log(req.body)
     try {
         // check if user in database already
         const userInDatabase = await User.findOne({

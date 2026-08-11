@@ -40,7 +40,7 @@ const show = async(req,res)=>{
 
 const update = async (req,res)=>{
     try {
-        const updatedOrder = await Order.findByIdAndUpdate(req.params.orderId,req.body,{new: true})
+        const updatedOrder = await Order.findByIdAndUpdate(req.params.orderId,req.body,{new: true}).populate('items')
         res.status(200).json(updatedOrder)
     } catch (error) {
         res.status(500).json({error: error.message})
