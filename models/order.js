@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 
 const orderItemSchema = new mongoose.Schema({
-   
+
     item: {
             type: String,
             enum: ['Coffee', 'Non-Coffee', 'Pastry'],
