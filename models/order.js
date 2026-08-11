@@ -1,11 +1,7 @@
 const mongoose = require('mongoose')
 
 const orderItemSchema = new mongoose.Schema({
-    customerName:{
-        type: String,
-        required: true,
-    },
-
+   
     item: {
             type: String,
             enum: ['Coffee', 'Non-Coffee', 'Pastry'],
