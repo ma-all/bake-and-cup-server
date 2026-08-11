@@ -16,7 +16,7 @@ const create = async (req, res) => {
 
 const index = async (req, res) => {
     try {
-        const orders = await Order.find({})
+        const orders = await Order.find({ user: req.user._id }).populate('items')
         console.log(orders);
 
         res.status(200).json(orders)
