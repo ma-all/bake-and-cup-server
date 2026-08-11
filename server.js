@@ -22,6 +22,9 @@ const menuCtrl = require('./controllers/menuItems')
 // order ctrl
 const orderCtrl = require('./controllers/orders')
 
+//reviews ctrl
+const reviewCtrl = require('./controllers/reviews')
+
 const verifyToken = require('./middleware/verify-token')
 
 mongoose.connect(process.env.MONGODB_URI)
@@ -43,22 +46,27 @@ app.post('/auth/sign-in', authCtrl.signIn)
 app.get('/users', verifyToken, usersCtrl.index)
 
 //menuItems routes
-app.post('/menu-items', uploadImages.single('img'), menuCtrl.create)
-app.get('/menu-items', menuCtrl.index)
-app.get('/menu-items/:menuItemId', menuCtrl.show)
-app.put('/menu-items/:menuItemId', menuCtrl.update)
-app.delete('/menu-items/:menuItemId', menuCtrl.deleteMenuItem)
+app.post('/menu-items', uploadImages.single('img'), verifyToken, menuCtrl.create)
+app.get('/menu-items', verifyToken, menuCtrl.index)
+app.get('/menu-items/:menuItemId', verifyToken, menuCtrl.show)
+app.put('/menu-items/:menuItemId', verifyToken, menuCtrl.update)
+app.delete('/menu-items/:menuItemId', verifyToken, menuCtrl.deleteMenuItem)
 
 
 // order routes
-app.post('/orders',orderCtrl.create)
-app.get('/orders', orderCtrl.index)
-app.get('/orders/:orderId', orderCtrl.show)
-app.put('/orders/:orderId', orderCtrl.update)
-app.delete('/orders/:orderId', orderCtrl.deleteOrder)
+app.post('/orders', verifyToken, orderCtrl.create)
+app.get('/orders', verifyToken, orderCtrl.index)
+app.get('/orders/:orderId', verifyToken, orderCtrl.show)
+app.put('/orders/:orderId', verifyToken, orderCtrl.update)
+app.delete('/orders/:orderId', verifyToken, orderCtrl.deleteOrder)
 
 //payment 
-app.post('/orders/create-payment', orderCtrl.createPayment)
+app.post('/orders/create-payment', verifyToken, orderCtrl.createPayment)
+
+//review routes
+app.post('/menu-items/:menuItemId/reviews', verifyToken, reviewCtrl.create)
+app.put('/menu-items/:menuItemId/reviews/:reviewId', verifyToken, reviewCtrl.update)
+app.delete('/menu-items/:menuItemId/reviews/:reviewId', verifyToken, reviewCtrl.deleteReview)
 
 
 app.listen(PORT, () => {

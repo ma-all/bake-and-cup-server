@@ -1,5 +1,17 @@
 const mongoose = require('mongoose')
 
+const reviewSchema = new mongoose.Schema({
+    comment: {
+        type: String,
+        required: true,
+    },
+    reviwer: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        required: true,
+    }
+}, {timestamps: true})
+
 const menuItemSchema = new mongoose.Schema({
     name: {
         type: String,
@@ -24,7 +36,8 @@ const menuItemSchema = new mongoose.Schema({
     },
     img: {
         type: String,
-    }
+    },
+    reviews: [reviewSchema],
 }, {timestamps: true})
 
 const MenuItem = mongoose.model('MenuItem', menuItemSchema)
