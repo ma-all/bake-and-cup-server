@@ -20,7 +20,7 @@ const update = async (req, res) => {
     try {
         const menuItem = await MenuItem.findById(req.params.menuItemId)
         const reviewCmt = menuItem.reviews.id(req.params.reviewId)
-        if (reviewCmt.reviwer.toString() !== req.user._id) {
+        if (!reviewCmt.reviwer.equals(req.user._id)) {
             return res
             .status(403)
             .json({ message: 'You cannot edit this review.'})
@@ -37,7 +37,7 @@ const deleteReview = async (req, res) => {
     try {
         const menuItem = await MenuItem.findById(req.params.menuItemId)
         const reviewCmt = menuItem.reviews.id(req.params.reviewId)
-        if (reviewCmt.reviwer.toString() !== req.user._id) {
+        if (!reviewCmt.reviwer.equals(req.user._id)) {
             return res
             .status(403)
             .json({ message: 'You cannot edit this review.'})
