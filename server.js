@@ -73,10 +73,6 @@ app.put('/menu-items/:menuItemId/reviews/:reviewId', verifyToken, reviewCtrl.upd
 app.delete('/menu-items/:menuItemId/reviews/:reviewId', verifyToken, reviewCtrl.deleteReview)
 
 
-app.get('/',()=>{
-  console.log("connected")
-})
-
 app.listen(PORT, () => {
   console.log(`The express app is ready on port ${PORT}! 😀`)
 })
