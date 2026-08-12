@@ -16,7 +16,7 @@ const create = async (req, res) => {
 
 const index = async (req, res) => {
     try {
-        const orders = await Order.find({})
+        const orders = await Order.find({ user: req.user._id }).populate('items')
         console.log(orders);
 
         res.status(200).json(orders)
@@ -29,10 +29,7 @@ const index = async (req, res) => {
 
 const show = async (req, res) => {
     try {
-        const order = await Order.findById(req.params.orderId)
-        
-        
-        
+        const order = await Order.findById(req.params.orderId).populate('items')
         res.status(200).json(order)
 
     } catch (error) {
