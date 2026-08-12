@@ -25,6 +25,10 @@ const User = require('../models/user')
 const signUp = async (req, res) => {
     try {
         // check if user in database already
+        const {password}=req.body
+        if(!password || password.length < 6){
+            return res.status(400).json({err : err.message})
+        }
         const userInDatabase = await User.findOne({
             username: req.body.username
         })
