@@ -30,6 +30,9 @@ const index = async (req, res) => {
 const show = async (req, res) => {
     try {
         const order = await Order.findById(req.params.orderId)
+        
+        
+        
         res.status(200).json(order)
 
     } catch (error) {
