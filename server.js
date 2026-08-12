@@ -40,8 +40,8 @@ app.use(morgan('dev'))
 // Routes go here
 // app.get('/auth/sign-token', authCtrl.signToken)
 // app.get('/auth/verify-token', authCtrl.verifyToken)
-app.get('/auth/sign-up', authCtrl.signUp)
-app.get('/auth/sign-in', authCtrl.signIn)
+// app.get('/auth/sign-up', authCtrl.signUp)
+// app.get('/auth/sign-in', authCtrl.signIn)
 app.post('/auth/sign-up', authCtrl.signUp)
 app.post('/auth/sign-in', authCtrl.signIn)
 
@@ -71,6 +71,7 @@ app.post('/orders/create-payment', verifyToken, orderCtrl.createPayment)
 app.post('/menu-items/:menuItemId/reviews', verifyToken, reviewCtrl.create)
 app.put('/menu-items/:menuItemId/reviews/:reviewId', verifyToken, reviewCtrl.update)
 app.delete('/menu-items/:menuItemId/reviews/:reviewId', verifyToken, reviewCtrl.deleteReview)
+
 
 
 app.listen(PORT, () => {
