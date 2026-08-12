@@ -4,6 +4,12 @@ Bake & Cup
 # Overview
 An online cafe that allows users to order coffee drinks, non-coffee drinks, pastries.
 
+## Frontend Link
+https://github.com/ma-all/bake-and-cup-frontend
+
+## Screenshot
+![alt text](image.png)
+
 ## Technologies Used (Backend)
 -**JS**
 -**MongoDB**
